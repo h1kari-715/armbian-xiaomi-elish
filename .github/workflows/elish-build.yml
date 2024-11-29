@@ -25,4 +25,5 @@ jobs:
                    KERNEL_CONFIGURE=no \
                    RELEASE=trixie \
                    BOARD=xiaomi-elish \
-                   EXPERT=yes
+                   EXPERT=yes \
+                   DESKTOP_APPGROUPS_SELECTED=no \
