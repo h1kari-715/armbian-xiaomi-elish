@@ -26,7 +26,7 @@ jobs:
                    RELEASE=trixie \
                    BOARD=xiaomi-elish \
                    EXPERT=yes \
-                   DESKTOP_APPGROUPS_SELECTED=no \
+                   DESKTOP_APPGROUPS_SELECTED=no 
           echo "::set-output name=status::success"
       - name: Upload Armbian Firmware to Release
         uses: ncipollo/release-action@main
