@@ -5,7 +5,7 @@ jobs:
   build-armbian:
     runs-on: ubuntu-latest
     steps:
-       - name: Download source code
+      - name: Download source code
         id: down
         run: |
           git clone --depth 1 https://github.com/h1kari-715/elish-armbian-build.git
