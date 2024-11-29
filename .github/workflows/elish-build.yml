@@ -24,4 +24,5 @@ jobs:
                    DESKTOP_ENVIRONMENT_CONFIG_NAME=config_base \
                    KERNEL_CONFIGURE=no \
                    RELEASE=trixie \
-                   BOARD=xiaomi-elish
+                   BOARD=xiaomi-elish \
+                   EXPERT=yes
