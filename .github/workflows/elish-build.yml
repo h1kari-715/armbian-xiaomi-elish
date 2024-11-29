@@ -8,13 +8,13 @@ jobs:
       - name: Download source code
         id: down
         run: |
-          git clone --depth 1 https://github.com/armbian/build.git
+          git clone --depth 1 https://github.com/h1kari-715/elish-armbian-build.git
 
       - name: Compile Armbian
         id: compile
         run: |
           # Compile method and parameter description: https://docs.armbian.com/Developer-Guide_Build-Options
-          cd build/
+          cd elish-armbian-build/
           sudo chmod +x compile.sh
           sudo ./compile.sh build \
                    BRANCH=current \
