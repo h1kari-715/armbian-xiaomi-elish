@@ -15,9 +15,9 @@ jobs:
         run: |
           # Compile method and parameter description: https://docs.armbian.com/Developer-Guide_Build-Options
           sudo apt update && sudo apt upgrade -y
-          sudo cd elish-armbian-build/
+          cd elish-armbian-build/
           sudo chmod +x compile.sh
-          ./compile.sh build \
+          sudo ./compile.sh build \
                    BRANCH=current \
                    BUILD_DESKTOP=yes \
                    BUILD_MINIMAL=no \
