@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 jobs:
   build-armbian:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Download source code
         id: down
@@ -16,7 +16,7 @@ jobs:
           # Compile method and parameter description: https://docs.armbian.com/Developer-Guide_Build-Options
           cd elish-armbian-build/
           sudo chmod +x compile.sh
-          sudo ./compile.sh build \
+          ./compile.sh build \
                    BRANCH=current \
                    BUILD_DESKTOP=yes \
                    BUILD_MINIMAL=no \
