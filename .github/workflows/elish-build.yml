@@ -5,11 +5,23 @@ jobs:
   build-armbian:
     runs-on: ubuntu-latest
     steps:
-      - uses: armbian/build@main
-        with:
-          armbian_token:     "${{ secrets.GITHUB_TOKEN }}"    # GitHub token
-          armbian_release:   "trixie"                         # userspace
-          armbian_target:    "build"                          # build=image, kernel=kernel
-          armbian_board:     "xiaomi-elish"                   # build target
-          armbian_ui:        "kde-plasma"                     # build desktop
-          
+       - name: Download source code
+        id: down
+        run: |
+          git clone --depth 1 https://github.com/h1kari-715/elish-armbian-build.git
+
+      - name: Compile Armbian
+        id: compile
+        run: |
+          # Compile method and parameter description: https://docs.armbian.com/Developer-Guide_Build-Options
+          cd build/
+          sudo chmod +x compile.sh
+          sudo ./compile.sh build \
+                   BRANCH=current \
+                   BUILD_DESKTOP=yes \
+                   BUILD_MINIMAL=no \
+                   DESKTOP_ENVIRONMENT=kde-plasma \
+                   DESKTOP_ENVIRONMENT_CONFIG_NAME=config_base \
+                   KERNEL_CONFIGURE=no \
+                   RELEASE=trixie \
+                   BOARD=xiaomi-elish
