@@ -42,7 +42,6 @@ gtk2-engines
 gtk2-engines-murrine
 gtk2-engines-pixbuf
 gvfs-backends
-hplip
 hunspell-en-us
 inputattach
 kde-plasma-desktop
@@ -80,7 +79,6 @@ pavumeter
 plasma-discover
 polkitd
 pkexec
-printer-driver-all
 profile-sync-daemon
 pulseaudio-module-bluetooth
 redshift
@@ -89,8 +87,6 @@ smbclient
 software-properties-gtk
 spice-vdagent
 systemsettings
-system-config-printer
-system-config-printer-common
 terminator
 tracker
 tracker-extract
