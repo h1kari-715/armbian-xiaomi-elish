@@ -1,0 +1,19 @@
+name: "Rebuild Armbian"
+on:
+  workflow_dispatch:
+jobs:
+  build-armbian:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Upload Armbian Firmware to Release
+        uses: ncipollo/release-action@main
+        with:
+          tag: test
+          artifacts: $PWD/.bashrc
+          allowUpdates: true
+          token: ${{ secrets.GH_TOKEN }}
+          body: |
+            This is Armbian firmware for Xiaomi Pad 5 Pro (elish)
+            * Firmware information
+            Default username: root
+            Default password: 1234
