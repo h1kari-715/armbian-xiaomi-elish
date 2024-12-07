@@ -21,20 +21,18 @@ jobs:
                    BRANCH=current \
                    BUILD_DESKTOP=yes \
                    BUILD_MINIMAL=no \
-                   DESKTOP_ENVIRONMENT=kde-plasma \
+                   DESKTOP_ENVIRONMENT=gnome \
                    DESKTOP_ENVIRONMENT_CONFIG_NAME=config_base \
                    KERNEL_CONFIGURE=no \
                    RELEASE=trixie \
                    BOARD=xiaomi-elish \
                    EXPERT=yes \
                    DESKTOP_APPGROUPS_SELECTED=no 
-          echo "::set-output name=status::success"
       - name: Upload Armbian Firmware to Release
         uses: ncipollo/release-action@main
-        if: steps.build.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
         with:
           tag: Armbian_${{ env.FILE_DATE }}
-          artifacts: ${{ env.FILEPATH }}/*
+          artifacts: $PWD/output/images/*
           allowUpdates: true
           token: ${{ secrets.GH_TOKEN }}
           body: |
