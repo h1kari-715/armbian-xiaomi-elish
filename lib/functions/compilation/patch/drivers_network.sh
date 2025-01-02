@@ -41,7 +41,7 @@ driver_rtl8189ES() {
 	if linux-version compare "${version}" ge 3.14; then
 
 		# Attach to specific commit (was "branch:master")
-		local rtl8189esver='commit:30a52f789a0b933c4a7eb06cbf4a4d21c8e581aa' # Commit date: May 19, 2024 (please update when updating commit ref)
+		local rtl8189esver='commit:4b508a2daef09e6049bbaa7971adc6d2d3e88899' # Commit date: Dec 23, 2024 (please update when updating commit ref)
 
 		display_alert "Adding" "Wireless drivers for Realtek 8189ES chipsets ${rtl8189esver}" "info"
 
@@ -133,7 +133,7 @@ driver_rtl8192EU() {
 	if linux-version compare "${version}" ge 3.14; then
 
 		# Attach to specific commit (was "branch:realtek-4.4.x")
-		local rtl8192euver='commit:a5ac6789a78a4f5ca0bf157a0f62385ea034cb9c' # Commit date: May 18, 2024 (please update when updating commit ref)
+		local rtl8192euver='commit:b9f21a6ff209edc220b2fc4ca610eb54595f218d' # Commit date: Dec 23, 2024 (please update when updating commit ref)
 
 		display_alert "Adding" "Wireless drivers for Realtek 8192EU chipsets ${rtl8192euver}" "info"
 
@@ -217,10 +217,10 @@ driver_xradio_xr819() {
 
 	# Wireless drivers for Xradio XR819 chipsets
 
-	if linux-version compare "${version}" ge 4.19 && linux-version compare "${version}" lt 6.11 && [[ "$LINUXFAMILY" == sunxi* ]]; then
+	if linux-version compare "${version}" ge 4.19 && [[ "$LINUXFAMILY" == sunxi* ]]; then
 
 		# Attach to specific commit (is branch:master)
-		local xradio_xr819_ver="commit:3a1f77fb2db248b7d18d93b67b16e0d6c91db184" # Commit date: Dec 25, 2023 (please update when updating commit ref)
+		local xradio_xr819_ver="commit:180aafb14191c78c1529d5a28ca58c7c9dcf2c55" # Commit date: Dec 6, 2024 (please update when updating commit ref)
 
 		display_alert "Adding" "Wireless drivers for Xradio XR819 chipsets" "info"
 
@@ -337,9 +337,8 @@ driver_rtw88() {
 		display_alert "Adding" "Upstream wireless RTW88 drivers" "info"
 		if [[ -f "${SRC}/patch/misc/rtw88/${version}/001-drivers-net-wireless-realtek-rtw88-upstream-wireless.patch" ]]; then
 			process_patch_file "${SRC}/patch/misc/rtw88/${version}/001-drivers-net-wireless-realtek-rtw88-upstream-wireless.patch" "applying"
+			process_patch_file "${SRC}/patch/misc/rtw88/hack/003-rtw88-decrease-the-log-level-of-tx-report.patch" "applying"
 		fi
-		process_patch_file "${SRC}/patch/misc/rtw88/hack/002-rtw88-usb-make-work-queues-high-priority.patch" "applying"
-		process_patch_file "${SRC}/patch/misc/rtw88/hack/003-rtw88-decrease-the-log-level-of-tx-report.patch" "applying"
 	fi
 }
 
@@ -520,6 +519,11 @@ driver_uwe5622() {
 			process_patch_file "${SRC}/patch/misc/wireless-uwe5622/uwe5622-v6.11.patch" "applying"
 		fi
 
+		# Fix "spanning-writes" warning in dmesg, applicable when kernel is compiled with FORTIFY_SOURCE 
+		if linux-version compare "${version}" ge 6.12; then
+			process_patch_file "${SRC}/patch/misc/wireless-uwe5622/uwe5622-fix-spanning-writes.patch" "applying"
+		fi
+
 	fi
 }
 
@@ -601,6 +605,10 @@ driver_rtl8723cs() {
 		process_patch_file "${SRC}/patch/misc/wireless-rtl8723cs/8723cs-Port-to-6.9.patch" "applying"
 	fi
 
+	if linux-version compare "${version}" ge 6.13; then
+		process_patch_file "${SRC}/patch/misc/wireless-rtl8723cs/8723cs-Port-to-6.13.patch" "applying"
+	fi
+
 }
 
 ###  The vendor's RTL8723DS driver is still required for RockPI-S support because
@@ -612,7 +620,7 @@ driver_rtl8723DS() {
 	if linux-version compare "${version}" ge 5.0; then
 
 		# Attach to specific commit (was "branch:master")
-		local rtl8723dsver='commit:52e593e8c889b68ba58bd51cbdbcad7fe71362e4' # Commit date: Nov 14, 2023 (please update when updating commit ref)
+		local rtl8723dsver='commit:4b8d758f42ce38b75f9a98a083906b0d59d244c3' # Commit date: Dec 23, 2024 (please update when updating commit ref)
 
 		display_alert "Adding" "Wireless drivers for Realtek 8723DS chipsets ${rtl8723dsver}" "info"
 
